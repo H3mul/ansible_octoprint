@@ -30,6 +30,7 @@
     - "{{ octoprint_user }} ALL=(ALL) NOPASSWD:/usr/bin/systemctl stop mjpg_streamer"
     - "{{ octoprint_user }} ALL=(ALL) NOPASSWD:/usr/sbin/shutdown -r now"
     - "{{ octoprint_user }} ALL=(ALL) NOPASSWD:/usr/sbin/shutdown -h now"
+    - "{{ octoprint_user }} ALL=(ALL) NOPASSWD:/usr/bin/vcgencmd"
 
 - name: Remove files and directories
   ansible.builtin.file:
