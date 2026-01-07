@@ -6,7 +6,7 @@ Wants=network-online.target
 [Service]
 Type=simple
 User={{ octoprint_user }}
-ExecStart={{ install_dir }}/Octoprint/venv/bin/octoprint
+ExecStart={{ install_dir }}/Octoprint/venv/bin/octoprint serve
 
 [Install]
 WantedBy=multi-user.target
