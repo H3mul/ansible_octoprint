@@ -22,7 +22,7 @@
 - name: Add octoprint user to tty and dialout groups.
   ansible.builtin.user:
     name: "{{ octoprint_user }}"
-    groups: tty, dialout
+    groups: tty, dialout, video
     append: true
 
 - name: Create octoprint directory.
