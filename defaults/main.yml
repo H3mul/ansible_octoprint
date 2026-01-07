@@ -8,7 +8,6 @@ uninstall_dependencies: false
 reset_config: true
 
 octoprint_version: latest
-latest_octoprint_url: "https://get.octoprint.org/latest"
 
 webcam_repo: "https://github.com/jacksonliam/mjpg-streamer.git"
 

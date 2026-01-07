@@ -7,14 +7,9 @@
       - python3-pip
       - python3-dev
       - python3-setuptools
+      - python3-venv
     state: present
     update_cache: true
-
-- name: Install virtualenv via pip.
-  ansible.builtin.pip:
-    name:
-      - virtualenv
-    state: present
 
 - name: Install other dependencies.
   ansible.builtin.package:
@@ -43,24 +38,29 @@
     state: directory
     owner: "{{ octoprint_user }}"
     group: "{{ octoprint_user }}"
+    
+- name: Create the virtual environment
+  ansible.builtin.command:
+    cmd: python3 -m venv "{{ install_dir }}/Octoprint/venv"
+    creates: "{{ install_dir }}/Octoprint/venv/bin/activate"
 
 - name: Install OctoPrint via pip - the latest verstion.
-  ansible.builtin.pip:
-    name: "{{ latest_octoprint_url }}"
+  pip:
+    name: octoprint
     state: present
     virtualenv: "{{ install_dir }}/Octoprint/venv"
-    virtualenv_command: virtualenv
-    virtualenv_python: python3
+    # virtualenv_command: virtualenv
+    # virtualenv_python: python3
   when: octoprint_version == 'latest'
 
 - name: Install OctoPrint via pip - the defined version.
-  ansible.builtin.pip:
+  pip:
     name: octoprint
     version: "=={{ octoprint_version }}"
     state: present
     virtualenv: "{{ install_dir }}/Octoprint/venv"
-    virtualenv_command: virtualenv
-    virtualenv_python: python3
+    # virtualenv_command: virtualenv
+    # virtualenv_python: python3
   when: octoprint_version != 'latest'
 
 - name: Install config.yaml template.
